@@ -1,7 +1,12 @@
 import 'dart:convert';
 
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:rest_api/models/user.dart';
+
+
+
 
 class FirstPage extends StatefulWidget {
   const FirstPage({Key? key}) : super(key: key);
@@ -11,7 +16,7 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
-  List<dynamic> users = [];
+  List<User> users = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,15 +36,10 @@ class _FirstPageState extends State<FirstPage> {
         itemCount: users.length,
         itemBuilder: (BuildContext context, int index) {
           final user = users[index];
-          final email = user["email"] ?? "No Email";
-          final name= user["name"]["first"];
-          final imageUrl=user["picture"]["thumbnail"] ?? "";
+          final email = user.email;
+
           return ListTile(
-            leading:ClipRRect(
-              borderRadius: BorderRadius.circular(100),
-              child: Image.network(imageUrl)),
             title: Text(email),
-            subtitle: Text(name.toString(),),
           );
         },
       ),
@@ -55,12 +55,23 @@ class _FirstPageState extends State<FirstPage> {
     if (response.statusCode == 200) {
       final body = response.body;
       final jsonData = jsonDecode(body);
+      final results = jsonData["results"] as List<dynamic>;
+      final transformed = results.map((e) {
+            return User(
+              cell: e['cell'],
+              email: e['email'],
+              gender: e['gender'],
+              phone: e['phone'],
+              nat: e['nat'],
+
+            );
+          }).toList();
 
       // Check if the 'results' key exists and is a non-null list
       if (jsonData.containsKey("results") &&
           jsonData["results"] is List<dynamic>) {
         setState(() {
-          users = jsonData["results"];
+          users = transformed;
         });
       } else {
         // Handle case where 'results' key is missing or not a list
