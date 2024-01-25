@@ -48,7 +48,7 @@ class _ListApiHitState extends State<ListApiHit> {
         backgroundColor: Colors.cyan,
       ),
       body: doneListData == null
-          ? const CupertinoActivityIndicator()
+          ? const Center(child: CupertinoActivityIndicator())
           : ListView.builder(
               itemCount: doneListData!.length,
               itemBuilder: ((context, index) {
