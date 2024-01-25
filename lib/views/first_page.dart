@@ -1,12 +1,8 @@
 import 'dart:convert';
 
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:rest_api/models/user.dart';
-
-
-
 
 class FirstPage extends StatefulWidget {
   const FirstPage({Key? key}) : super(key: key);
@@ -57,15 +53,14 @@ class _FirstPageState extends State<FirstPage> {
       final jsonData = jsonDecode(body);
       final results = jsonData["results"] as List<dynamic>;
       final transformed = results.map((e) {
-            return User(
-              cell: e['cell'],
-              email: e['email'],
-              gender: e['gender'],
-              phone: e['phone'],
-              nat: e['nat'],
-
-            );
-          }).toList();
+        return User(
+          cell: e['cell'],
+          email: e['email'],
+          gender: e['gender'],
+          phone: e['phone'],
+          nat: e['nat'],
+        );
+      }).toList();
 
       // Check if the 'results' key exists and is a non-null list
       if (jsonData.containsKey("results") &&

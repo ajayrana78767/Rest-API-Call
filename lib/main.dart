@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:rest_api/list_api.dart';
+import 'package:rest_api/provoider/signUp_provider.dart';
+import 'package:rest_api/views/list_api.dart';
 //import 'package:rest_api/list_api.dart';
-import 'package:rest_api/login_screen.dart';
+//import 'package:rest_api/views/login_screen.dart';
+import 'package:rest_api/views/signUpPage.dart';
 
 import 'provoider/login_provider.dart';
 
@@ -24,6 +26,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => LoginProvider(),
         ),
+        ChangeNotifierProvider(create: (_) => SignUpProvider()),
       ],
       child: GetMaterialApp(
         title: 'Flutter Demo',
@@ -36,11 +39,13 @@ class MyApp extends StatelessWidget {
         getPages: [
           GetPage(
             name: '/', // Define the '/' route
-            page: () => const LoginScreen(), // Set LoginScreen as the initial route
+            page: () =>
+                const SignUpScreen(), // Set LoginScreen as the initial route
           ),
           GetPage(
             name: '/ListApiHit', // Define the '/ListApiHit' route
-            page: () => const ListApiHit(), // Set ListApiHit as the destination for '/ListApiHit'
+            page: () =>
+                const ListApiHit(), // Set ListApiHit as the destination for '/ListApiHit'
           ),
           // Other routes...
         ],

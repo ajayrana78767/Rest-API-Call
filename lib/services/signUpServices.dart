@@ -8,18 +8,18 @@ import 'dart:convert';
 import 'package:rest_api/views/list_api.dart';
 
 
-class UserLoginService{
-  static loginFun (TextEditingController loginEmailController, TextEditingController loginPasswordController)async{
+class UserSignUpService{
+  static signUpFun (TextEditingController signUpEmailController, TextEditingController signUpPasswordController)async{
      try {
       var headers = {"Content-Type": "application/json"};
 
       var body = {
-        "email": loginEmailController.text.trim(),
-        "password": loginPasswordController.text.trim(),
+        "email": signUpEmailController.text.trim(),
+        "password": signUpPasswordController.text.trim(),
       };
 
       http.Response response = await http.post(
-        Uri.parse("https://reqres.in/api/login"),
+        Uri.parse("https://reqres.in/api/register"),
         headers: headers,
         body: jsonEncode(body),
       );

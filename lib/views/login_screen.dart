@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rest_api/provoider/login_provider.dart';
@@ -12,6 +14,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final LoginPRovider = Provider.of<LoginProvider>(context, listen: false);
 
     return Scaffold(
